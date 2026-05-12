@@ -14,4 +14,9 @@ public class UserController {
         return "Showing all users";
     }
 
+    @GetMapping
+    public String getUser(){
+        return "showing one user";
+    }
+
 }
