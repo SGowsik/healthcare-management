@@ -1,24 +1,32 @@
 package com.binarybot.user_service.controller;
 
+import com.binarybot.user_service.dto.UserRequestDto;
+import com.binarybot.user_service.dto.UserResponseDto;
 import com.binarybot.user_service.model.Users;
 import com.binarybot.user_service.service.UserService;
 import com.binarybot.user_service.service.UserServiceInterface;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserServiceInterface userServiceinterface ;
 
-   @PostMapping("/create")
+     UserServiceInterface userServiceinterface ;
 
-    public Users createUsers(@RequestBody Users user){
+    @PostMapping("/register")
+    public ResponseEntity<UserResponseDto> registerUser(
+            @Valid @RequestBody UserRequestDto userRequestDto) {
 
-     return  userServiceinterface.createUsers(user);
+        UserResponseDto response = userServiceinterface.createUsers(userRequestDto);
 
-   }
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
 
 }

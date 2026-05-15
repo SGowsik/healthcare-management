@@ -1,11 +1,10 @@
 package com.binarybot.user_service.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.binarybot.user_service.enums.Role;
+import jakarta.persistence.*;
 import jdk.jfr.DataAmount;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,15 +12,26 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Users {
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
-    private String userName;
+     private Long id;
+
+    private String name;
+
     private String password;
-    private Long userMobileNumber;
-    private String userMail;
-    private String userAdderess;
-    private String userRole;
+
+    @Column(unique = true)
+    private String email;
+
+    @Column(unique = true)
+    private String mobileNumber;
+
+    private String address;
+
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 }
