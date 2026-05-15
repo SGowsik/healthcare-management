@@ -1,8 +1,19 @@
 package com.binarybot.user_service.service;
 
-public class UserService {
+import com.binarybot.user_service.dao.UserRepo;
+import com.binarybot.user_service.model.Users;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-     public String findUser(){
-        return "user finded successfully ";
+@Service
+public class UserService implements UserServiceInterface {
+    @Autowired
+    private UserRepo userRepo;
+
+    public Users createUsers(Users user){
+
+      return userRepo.save(user);
     }
+
+
 }
