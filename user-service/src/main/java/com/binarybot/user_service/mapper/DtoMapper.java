@@ -23,7 +23,6 @@ public static Users toEntity(UserRequestDto userRequestDto){
             .mobileNumber(userRequestDto.getMobileNumber())
             .email(userRequestDto.getEmail())
             .address(userRequestDto.getAddress())
-            .role(userRequestDto.getRole())
             .build();
 
 }

@@ -29,8 +29,7 @@ public class UserRequestDto {
         @NotBlank(message = "Address is required")
         private String address;
 
-        @NotNull
-        private Role role;
+
 
 
 
