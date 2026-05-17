@@ -34,7 +34,7 @@ public class UserService implements UserServiceInterface {
     public void login(LoginRequestDto loginRequestDto) {
 
        Users users= userRepo.findByEmail(loginRequestDto.getEmail())
-               .orElseThrow(()->new RuntimeException(""));
+               .orElseThrow(()->new RuntimeException("Invalid Credentials"));
     }
     
     public UserResponseDto findUser(Long id){
