@@ -1,7 +1,9 @@
 package com.binary_bot.doctor_service.controller;
 
+import com.binary_bot.doctor_service.dto.DoctorApplicationResponseDto;
 import com.binary_bot.doctor_service.dto.DoctorApplyRequestDto;
 import com.binary_bot.doctor_service.service.DoctorService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,12 +13,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/doctor")
 public class DoctorController {
 
-
     private DoctorService doctorService;
 
     @PostMapping("/apply")
-    public ResponseEntity<?> applyDoctor(@RequestParam Long userId,
-                                         @RequestBody DoctorApplyRequestDto request) {
+    public ResponseEntity<DoctorApplicationResponseDto> applyDoctor(
+            @RequestParam Long userId,
+            @Valid @RequestBody DoctorApplyRequestDto request) {
 
         return ResponseEntity.ok(doctorService.applyDoctor(userId, request));
     }
@@ -34,8 +36,18 @@ public class DoctorController {
         return ResponseEntity.ok("Rejected successfully");
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getDoctor(@PathVariable Long id) {
-        return ResponseEntity.ok(doctorService.getDoctorById(id));
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> getDoctorByUserId(@PathVariable Long userId) {
+        return ResponseEntity.ok(doctorService.getDoctorByUserId(userId));
+    }
+
+    @GetMapping("/applications")
+    public ResponseEntity<?> getAllApplications() {
+        return ResponseEntity.ok(doctorService.getAllApplications());
+    }
+
+    @GetMapping("/application/{userId}")
+    public ResponseEntity<?> getApplicationByUserId(@PathVariable Long userId) {
+        return ResponseEntity.ok(doctorService.getApplicationByUserId(userId));
     }
 }

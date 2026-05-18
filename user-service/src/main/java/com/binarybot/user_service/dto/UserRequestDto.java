@@ -1,12 +1,10 @@
 package com.binarybot.user_service.dto;
 
 import com.binarybot.user_service.enums.Role;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Data;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
+//import org.hibernate.validator.constraints.Email;
+//import org.hibernate.validator.constraints.NotBlank;
 
 @Data
 public class UserRequestDto {

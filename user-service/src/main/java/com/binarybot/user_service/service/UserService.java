@@ -2,6 +2,7 @@ package com.binarybot.user_service.service;
 
 import com.binarybot.user_service.dao.UserRepo;
 import com.binarybot.user_service.dto.LoginRequestDto;
+import com.binarybot.user_service.dto.LoginResponseDto;
 import com.binarybot.user_service.dto.UserRequestDto;
 import com.binarybot.user_service.dto.UserResponseDto;
 import com.binarybot.user_service.enums.Role;
@@ -31,10 +32,20 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public void login(LoginRequestDto loginRequestDto) {
+    public LoginResponseDto login(LoginRequestDto request) {
 
-       Users users= userRepo.findByEmail(loginRequestDto.getEmail())
-               .orElseThrow(()->new RuntimeException("Invalid Credentials"));
+        Users user = userRepo.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (!user.getPassword().equals(request.getPassword())) {
+            throw new RuntimeException("Invalid password");
+        }
+
+        return new LoginResponseDto(
+                user.getId(),
+                user.getEmail(),
+                user.getRole().name() // if enum
+        );
     }
     
     public UserResponseDto findUser(Long id){

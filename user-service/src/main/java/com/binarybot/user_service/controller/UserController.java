@@ -1,6 +1,7 @@
 package com.binarybot.user_service.controller;
 
 import com.binarybot.user_service.dto.LoginRequestDto;
+import com.binarybot.user_service.dto.LoginResponseDto;
 import com.binarybot.user_service.dto.UserRequestDto;
 import com.binarybot.user_service.dto.UserResponseDto;
 import com.binarybot.user_service.model.Users;
@@ -12,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/user")
@@ -31,11 +32,12 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequestDto  loginRequestDto){
+    public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto request) {
 
-       userServiceinterface.login(loginRequestDto);
+        LoginResponseDto response = userServiceinterface.login(request);
 
-      return ResponseEntity.ok("login successfull");
+        return ResponseEntity.ok(response);
+
     }
 
     @GetMapping("/{userId}")
