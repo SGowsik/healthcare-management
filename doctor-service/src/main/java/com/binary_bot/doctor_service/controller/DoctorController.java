@@ -36,9 +36,9 @@ public class DoctorController {
         return ResponseEntity.ok("Rejected successfully");
     }
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<?> getDoctorByUserId(@PathVariable Long userId) {
-        return ResponseEntity.ok(doctorService.getDoctorByUserId(userId));
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getDoctorById(@PathVariable Long id) {
+        return ResponseEntity.ok(doctorService.getDoctorById(id));
     }
 
     @GetMapping("/applications")
@@ -49,5 +49,10 @@ public class DoctorController {
     @GetMapping("/application/{userId}")
     public ResponseEntity<?> getApplicationByUserId(@PathVariable Long userId) {
         return ResponseEntity.ok(doctorService.getApplicationByUserId(userId));
+    }
+
+    @GetMapping("/verified")
+    public ResponseEntity<?> getVerifiedDoctors() {
+        return ResponseEntity.ok(doctorService.getVerifiedDoctors());
     }
 }

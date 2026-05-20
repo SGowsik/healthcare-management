@@ -2,6 +2,7 @@ package com.binary_bot.doctor_service.mapper;
 
 import com.binary_bot.doctor_service.dto.DoctorApplyRequestDto;
 import com.binary_bot.doctor_service.dto.DoctorResponseDto;
+import com.binary_bot.doctor_service.dto.UserDto;
 import com.binary_bot.doctor_service.model.Doctor;
 import lombok.Data;
 import org.mapstruct.Mapper;
@@ -27,16 +28,27 @@ public class DoctorMapper {
             return doctor;
         }
 
-        public  static DoctorResponseDto toDTO(Doctor doctor) {
-            DoctorResponseDto dto = new DoctorResponseDto();
-            dto.setId(doctor.getId());
-            dto.setSpecialization(doctor.getSpecialization());
-            dto.setQualification(doctor.getQualification());
-            dto.setExperienceYears(doctor.getExperienceYears());
-            dto.setHospitalName(doctor.getHospitalName());
-            dto.setVerified(doctor.isVerified());
+    public DoctorResponseDto toDTO(Doctor doc, UserDto user) {
 
-            return dto;
-        }
+        DoctorResponseDto dto = new DoctorResponseDto();
+
+        dto.setId(doc.getId());
+        dto.setUserId(doc.getUserId());
+
+        dto.setSpecialization(doc.getSpecialization());
+        dto.setQualification(doc.getQualification());
+        dto.setExperienceYears(doc.getExperienceYears());
+        dto.setHospitalName(doc.getHospitalName());
+
+        dto.setVerified(doc.isVerified());
+
+        //  from User Service
+        dto.setName(user.getName());
+        dto.setEmail(user.getEmail());
+        dto.setMobileNumber(user.getMobileNumber());
+
+        return dto;
+    }
+
     }
 
