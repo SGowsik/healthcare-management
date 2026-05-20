@@ -11,4 +11,11 @@ public class DoctorApplyRequestDto {
 
     @NotBlank(message = "License number is required")
     private String licenseNumber;
+
+    @NotBlank(message = "Hospital name is required")
+    private String hospitalName;
+
+    private int experienceYears;
+
+    private String qualification;
 }

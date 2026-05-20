@@ -21,6 +21,10 @@ public class DoctorApplication {
     private String specialization;
     private String licenseNumber;
 
+    private String hospitalName;
+    private int experienceYears;
+    private String qualification;
+
     @Enumerated(EnumType.STRING)
     private Status status; // PENDING, APPROVED, REJECTED
 }
