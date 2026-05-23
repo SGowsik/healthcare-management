@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
 
-     UserServiceInterface userServiceinterface ;
+     private UserServiceInterface userServiceinterface ;
 
     @PostMapping("/register")
     public ResponseEntity<UserResponseDto> registerUser(
