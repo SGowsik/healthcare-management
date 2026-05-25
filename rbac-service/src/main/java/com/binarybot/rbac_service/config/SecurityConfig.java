@@ -1,4 +1,4 @@
-package com.binarybot.rbac_service.controller;
+package com.binarybot.rbac_service.config;
 //package com.binarybot.rbac_service.config;
 
 import org.springframework.context.annotation.Bean;
