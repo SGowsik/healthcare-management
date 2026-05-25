@@ -1,0 +1,92 @@
+#spring.application.name=api-gateway
+#server.port=8080
+#
+#eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+#
+## User Service Route
+#spring.cloud.gateway.routes[0].id=user-service
+#spring.cloud.gateway.routes[0].uri=lb://USER-SERVICE
+#spring.cloud.gateway.routes[0].predicates[0]=Path=/user/**
+#
+## Doctor Service Route
+#spring.cloud.gateway.routes[1].id=doctor-service
+#spring.cloud.gateway.routes[1].uri=lb://DOCTOR-SERVICE
+#spring.cloud.gateway.routes[1].predicates[0]=Path=/doctor/**
+#
+#
+#spring.cloud.gateway.routes[2].id=appointment-service
+#spring.cloud.gateway.routes[2].uri=lb://APPOINTMENT-SERVICE
+#spring.cloud.gateway.routes[2] .predicates[0]=Path=/appointment/**
+#
+#spring.cloud.gateway.globalcors.cors-configurations.[/**].allowed-origins=http://localhost:3000
+#spring.cloud.gateway.globalcors.cors-configurations.[/**].allowed-methods=GET,POST,PUT,DELETE,OPTIONS
+#spring.cloud.gateway.globalcors.cors-configurations.[/**].allowed-headers=*
+#spring.cloud.gateway.globalcors.cors-configurations.[/**].allow-credentials=true
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user/**
+
+        - id: doctor-service
+          uri: lb://DOCTOR-SERVICE
+          predicates:
+            - Path=/doctor/**
+
+
+        - id: appointment-service
+          uri: lb://APPOINTMENT-SERVICE
+          predicates:
+            - Path=/appointment/**
+
+        - id: rbac-service
+          uri: lb://RBAC-SERVICE
+          predicates:
+            - Path=/api/rbac/**
+
+        - id: knowledge-service
+          uri: lb://KNOWLEDGE-SERVICE
+          predicates:
+            - Path=/api/knowledge/**
+
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins:
+              - http://localhost:3000
+            allowed-methods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowed-headers:
+              - "*"
+            allow-credentials: true
+
+#server:
+#  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
